@@ -18,7 +18,6 @@ class PostController(
 ) {
 
     @GetMapping
-    @LogExecutionTime
     suspend fun test(): Flow<Post> {
         val findAll = findAll()
         println("요게 먼저 찍혀야지")
@@ -29,7 +28,7 @@ class PostController(
             postRepository.findAll()
                     .asFlow()
                     .onStart {
-                        delay(10000)
+                        delay(1000)
                         println(Thread.currentThread())
                     }
 

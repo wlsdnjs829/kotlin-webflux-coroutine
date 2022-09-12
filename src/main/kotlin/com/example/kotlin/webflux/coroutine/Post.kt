@@ -6,7 +6,7 @@ import org.springframework.data.relational.core.mapping.Table
 
 @Table
 data class Post(
-    @Id val id: Long? = null,
-    @Column val title: String? = null,
-    @Column val content: String? = null
+    @Id val id: Long?,
+    @Column val title: String,
+    @Column val content: String
 )
