@@ -16,13 +16,22 @@ import org.springframework.web.bind.annotation.*
 class PostController(
         private val postRepository: PostRepository
 ) {
+
     @GetMapping
     @LogExecutionTime
+    suspend fun test(): Flow<Post> {
+        val findAll = findAll()
+        println("요게 먼저 찍혀야지")
+        return findAll
+    }
+
     suspend fun findAll(): Flow<Post> =
             postRepository.findAll()
                     .asFlow()
-                    .onCompletion { delay(10000) }
-                    .also { println(Thread.currentThread()) }
+                    .onStart {
+                        delay(10000)
+                        println(Thread.currentThread())
+                    }
 
     @PostMapping
     @Transactional

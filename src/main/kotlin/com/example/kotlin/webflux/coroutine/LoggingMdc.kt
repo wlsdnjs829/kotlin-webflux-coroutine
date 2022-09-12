@@ -13,9 +13,9 @@ import kotlin.coroutines.Continuation
 
 @Aspect
 @Component
-open class LoggingMdc {
+class LoggingMdc {
 
-    @Around(value = "@annotation(LogExecutionTime)")
+    @Around(value = """@annotation(LogExecutionTime)""")
     fun addCoroutineMdc(joinPoint: ProceedingJoinPoint): Any? {
         val signature = joinPoint.signature as MethodSignature
         val method = signature.method
